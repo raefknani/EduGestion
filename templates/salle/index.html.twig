@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salle index
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="mb-4">Gestion des salles</h1>
+
+	<form method="get" action="{{ path('app_salle_index') }}" class="row g-2 mb-4">
+
+		<div class="col-md-4">
+			<input type="text" name="search" class="form-control" placeholder="Rechercher une salle..." value="{{ search|default('') }}">
+		</div>
+
+		<div class="col-md-4">
+			<select name="disponible" class="form-select">
+
+				<option value="">Toutes les salles</option>
+
+				<option value="1" {% if disponible is same as('1') %} selected {% endif %}>
+					Disponibles
+				</option>
+
+				<option value="0" {% if disponible is same as('0') %} selected {% endif %}>
+					Indisponibles
+				</option>
+
+			</select>
+		</div>
+
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary w-100">
+				Rechercher
+			</button>
+		</div>
+
+		<div class="col-md-2">
+			<a href="{{ path('app_salle_index') }}" class="btn btn-secondary w-100">
+				Réinitialiser
+			</a>
+		</div>
+
+	</form>
+
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Numero</th>
+				<th>Capacite</th>
+				<th>Disponible</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for salle in salles %}
+				<tr>
+					<td>{{ salle.id }}</td>
+					<td>{{ salle.numero }}</td>
+					<td>{{ salle.capacite }}</td>
+					<td>{{ salle.disponible ? 'Yes' : 'No' }}</td>
+					<td>
+						<a href="{{ path('app_salle_show', {'id': salle.id}) }}">show</a>
+						<a href="{{ path('app_salle_edit', {'id': salle.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_salle_new') }}">Create new</a>
+{% endblock %}

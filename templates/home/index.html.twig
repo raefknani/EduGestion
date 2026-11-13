@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EduGestion - Accueil
+{% endblock %}
+
+{% block body %}
+
+	<div class="container mt-5">
+
+		<h1 class="text-center mb-3">EduGestion</h1>
+
+		<p class="text-center text-muted mb-5">
+			Application de gestion universitaire
+		</p>
+
+		<div class="row g-4">
+
+			<div class="col-md-4">
+				<div class="card shadow-sm text-center">
+					<div class="card-body">
+						<h3>Notes</h3>
+						<p>Gestion des notes des étudiants</p>
+						<a href="{{ path('app_note_index') }}" class="btn btn-primary">
+							Gérer les notes
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card shadow-sm text-center">
+					<div class="card-body">
+						<h3>Absences</h3>
+						<p>Gestion des absences</p>
+						<a href="{{ path('app_absence_index') }}" class="btn btn-success">
+							Gérer les absences
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card shadow-sm text-center">
+					<div class="card-body">
+						<h3>Salles</h3>
+						<p>Gestion des salles</p>
+						<a href="{{ path('app_salle_index') }}" class="btn btn-warning">
+							Gérer les salles
+						</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}

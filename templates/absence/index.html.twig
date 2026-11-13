@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Absence index
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="mb-4">Gestion des absences</h1>
+
+	<form method="get" action="{{ path('app_absence_index') }}" class="row g-2 mb-4">
+
+		<div class="col-md-4">
+			<input type="text" name="search" class="form-control" placeholder="Rechercher un étudiant..." value="{{ search|default('') }}">
+		</div>
+
+		<div class="col-md-4">
+			<select name="justifiee" class="form-select">
+				<option value="">Toutes les absences</option>
+
+				<option value="1" {% if justifiee == '1' %} selected {% endif %}>
+					Justifiées
+				</option>
+
+				<option value="0" {% if justifiee == '0' %} selected {% endif %}>
+					Non justifiées
+				</option>
+			</select>
+		</div>
+
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary w-100">
+				Rechercher
+			</button>
+		</div>
+
+		<div class="col-md-2">
+			<a href="{{ path('app_absence_index') }}" class="btn btn-secondary w-100">
+				Réinitialiser
+			</a>
+		</div>
+	</form>
+
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>NomEtudiant</th>
+				<th>DateAbsence</th>
+				<th>Justifiee</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for absence in absences %}
+				<tr>
+					<td>{{ absence.id }}</td>
+					<td>{{ absence.nomEtudiant }}</td>
+					<td>{{ absence.dateAbsence ? absence.dateAbsence|date('Y-m-d') : '' }}</td>
+					<td>{{ absence.justifiee ? 'Yes' : 'No' }}</td>
+					<td>
+						<a href="{{ path('app_absence_show', {'id': absence.id}) }}">show</a>
+						<a href="{{ path('app_absence_edit', {'id': absence.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_absence_new') }}">Create new</a>
+{% endblock %}

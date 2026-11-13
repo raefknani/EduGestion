@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des notes
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+
+		<h1 class="mb-4">Gestion des notes</h1>
+
+		{# Search form #}
+
+		<form method="get" action="{{ path('app_note_index') }}" class="row g-2 mb-4">
+
+			<div class="col-md-4">
+				<input type="text" name="search" class="form-control" placeholder="Rechercher un étudiant..." value="{{ search|default('') }}">
+			</div>
+
+			<div class="col-md-4">
+				<select name="matiere" class="form-select">
+					<option value="">Toutes les matières</option>
+
+					{% for m in matieres %}
+						<option value="{{ m }}" {% if matiere == m %} selected {% endif %}>
+							{{ m }}
+						</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-primary w-100">
+					Rechercher
+				</button>
+			</div>
+
+			<div class="col-md-2">
+				<a href="{{ path('app_note_index') }}" class="btn btn-secondary w-100">
+					Réinitialiser
+				</a>
+			</div>
+		</form>
+
+
+		{# Add new grade #}
+		<a href="{{ path('app_note_new') }}" class="btn btn-success mb-3">
+			+ Ajouter une note
+		</a>
+
+		{# Notes table #}
+		<table class="table table-bordered table-striped">
+			<thead class="table-dark">
+				<tr>
+					<th>Id</th>
+					<th>Nom étudiant</th>
+					<th>Matière</th>
+					<th>Note</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for note in notes %}
+					<tr>
+						<td>{{ note.id }}</td>
+						<td>{{ note.nomEtudiant }}</td>
+						<td>{{ note.matiere }}</td>
+						<td>{{ note.note }}</td>
+						<td>
+							<a href="{{ path('app_note_show', {'id': note.id}) }}" class="btn btn-info btn-sm">
+								Voir
+							</a>
+
+							<a href="{{ path('app_note_edit', {'id': note.id}) }}" class="btn btn-warning btn-sm">
+								Modifier
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5" class="text-center">
+							Aucune note trouvée
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
+{% endblock %}
