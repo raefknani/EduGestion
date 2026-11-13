@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\AbsenceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: AbsenceRepository::class)]
 class Absence
@@ -15,10 +17,16 @@ class Absence
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(
+        message: "Le nom de l'étudiant est obligatoire."
+    )]
     private ?string $nomEtudiant = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $dateAbsence = null;
+    #[Assert\NotNull(
+        message: "La date d'absence est obligatoire."
+    )]
+    private ?\DateTimeInterface $dateAbsence = null;
 
     #[ORM\Column]
     private ?bool $justifiee = null;
@@ -40,12 +48,12 @@ class Absence
         return $this;
     }
 
-    public function getDateAbsence(): ?\DateTime
+    public function getDateAbsence(): ?\DateTimeInterface
     {
         return $this->dateAbsence;
     }
 
-    public function setDateAbsence(\DateTime $dateAbsence): static
+    public function setDateAbsence(\DateTimeInterface $dateAbsence): static
     {
         $this->dateAbsence = $dateAbsence;
 

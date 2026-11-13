@@ -1,7 +1,9 @@
 {{ form_start(form) }}
 
-<div class="mb-3">
-	{{ form_label(form.numero, 'Numéro de salle') }}
+<div class="mb-4">
+	{{ form_label(form.numero, 'Numéro de salle', {
+        'label_attr': {'class': 'form-label fw-semibold'}
+    }) }}
 
 	{{ form_widget(form.numero, {
         'attr': {
@@ -13,44 +15,44 @@
 	{{ form_errors(form.numero) }}
 </div>
 
-<div class="mb-3">
-	{{ form_label(form.capacite, 'Capacité') }}
+<div class="mb-4">
+	{{ form_label(form.capacite, "Capacité d'accueil", {
+        'label_attr': {'class': 'form-label fw-semibold'}
+    }) }}
 
 	{{ form_widget(form.capacite, {
         'attr': {
             'class': 'form-control',
-            'min': 1,
-            'placeholder': 'Ex : 30'
+            'placeholder': 'Ex : 30',
+            'min': 1
         }
     }) }}
 
 	{{ form_errors(form.capacite) }}
 </div>
 
-<div class="form-check mb-3">
+<div class="form-check mb-4">
 	{{ form_widget(form.disponible, {
-        'attr': {
-            'class': 'form-check-input'
-        }
+        'attr': {'class': 'form-check-input'}
     }) }}
 
 	{{ form_label(form.disponible, 'Salle disponible', {
-        'label_attr': {
-            'class': 'form-check-label'
-        }
+        'label_attr': {'class': 'form-check-label'}
     }) }}
 
 	{{ form_errors(form.disponible) }}
 </div>
 
-<div class="d-flex gap-2">
-	<button type="submit" class="btn btn-success">
-		{{ button_label|default('Enregistrer') }}
-	</button>
+<hr class="my-4">
 
-	<a href="{{ path('app_salle_index') }}" class="btn btn-secondary">
+<div class="d-flex justify-content-end gap-2">
+	<a href="{{ path('app_salle_index') }}" class="btn btn-outline-secondary">
 		Annuler
 	</a>
+
+	<button type="submit" class="btn btn-primary">
+		{{ button_label|default('Enregistrer') }}
+	</button>
 </div>
 
 {{ form_end(form) }}

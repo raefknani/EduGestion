@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class SalleController extends AbstractController
 {
     
+
 #[Route('/', name: 'app_salle_index', methods: ['GET'])]
 public function index(
     Request $request,
@@ -22,10 +23,11 @@ public function index(
 ): Response {
     $search = trim($request->query->get('search', ''));
     $disponible = $request->query->get('disponible', '');
+    $capacite = $request->query->get('capacite', '');
 
     $qb = $salleRepository->createQueryBuilder('s');
 
-    // Search by room number
+    // Filter by classroom number
     if ($search !== '') {
         $qb->andWhere('LOWER(s.numero) LIKE LOWER(:search)')
            ->setParameter('search', '%' . $search . '%');
@@ -34,7 +36,13 @@ public function index(
     // Filter by availability
     if ($disponible === '1' || $disponible === '0') {
         $qb->andWhere('s.disponible = :disponible')
-           ->setParameter('disponible', (int) $disponible);
+           ->setParameter('disponible', $disponible === '1');
+    }
+
+    // Filter by minimum capacity
+    if ($capacite !== '' && ctype_digit($capacite)) {
+        $qb->andWhere('s.capacite >= :capacite')
+           ->setParameter('capacite', (int) $capacite);
     }
 
     $salles = $qb->getQuery()->getResult();
@@ -43,6 +51,7 @@ public function index(
         'salles' => $salles,
         'search' => $search,
         'disponible' => $disponible,
+        'capacite' => $capacite,
     ]);
 }
 

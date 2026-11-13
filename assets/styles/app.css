@@ -1,3 +1,278 @@
+/* ===============================
+   EDUGESTION - GLOBAL DESIGN
+================================ */
+
+:root {
+    --primary: #3158bc;
+    --background: #f6f8fc;
+    --text: #18253b;
+    --muted: #64748b;
+    --border: #e5eaf1;
+}
+
+/* General page */
+
 body {
-    background-color: skyblue;
+    background: var(--background);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    font-size: 15px;
+}
+
+/* ===============================
+   NAVIGATION BAR
+================================ */
+
+.navbar {
+    background: #ffffff !important;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(24, 37, 59, 0.03);
+    padding: 14px 0;
+}
+
+.navbar .navbar-brand {
+    color: var(--text) !important;
+    font-weight: 700;
+    font-size: 21px;
+}
+
+.navbar .nav-link {
+    color: var(--muted) !important;
+    font-weight: 500;
+    padding: 8px 14px;
+    transition: all 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+    color: var(--primary) !important;
+}
+
+.navbar .nav-link.active {
+    color: var(--primary) !important;
+    font-weight: 700;
+    background-color: #eaf0ff;
+    border-radius: 8px;
+}
+
+/* ===============================
+   HEADINGS
+================================ */
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 23px;
+    font-weight: 650;
+}
+
+/* ===============================
+   CARDS
+================================ */
+
+.card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(24, 37, 59, 0.04);
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 9px 16px;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+/* ===============================
+   FORM INPUTS
+================================ */
+
+.form-control,
+.form-select {
+    border: 1px solid #dbe2ec;
+    border-radius: 8px;
+    min-height: 43px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(49, 88, 188, 0.1);
+}
+
+/* ===============================
+   MODERN CRUD TABLES
+================================ */
+
+.table-responsive {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow-x: auto;
+    box-shadow: 0 4px 18px rgba(25, 40, 70, 0.04);
+}
+
+/* Main table */
+
+.table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    --bs-table-bg: transparent;
+    --bs-table-border-color: #e9eef5;
+}
+
+/* Table header */
+
+.table thead th {
+    background: #f8fafc !important;
+    color: #64748b !important;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 17px 20px;
+    border: 0 !important;
+    border-bottom: 1px solid #e5eaf1 !important;
+    white-space: nowrap;
+}
+
+/* Table rows */
+
+.table tbody td {
+    padding: 17px 20px;
+    color: #334155;
+    font-size: 14px;
+    border: 0 !important;
+    border-bottom: 1px solid #edf1f6 !important;
+    vertical-align: middle;
+}
+
+/* Remove last border */
+
+.table tbody tr:last-child td {
+    border-bottom: 0 !important;
+}
+
+/* Hover effect */
+
+.table tbody tr:hover td {
+    background-color: #f8fbff !important;
+}
+
+/* Override Bootstrap striped table colors */
+
+.table.table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-bg-type: transparent;
+    --bs-table-color-type: inherit;
+}
+
+.table.table-hover > tbody > tr:hover > * {
+    --bs-table-bg-state: #f8fbff;
+}
+
+/* Override dark table headers */
+
+.table thead.table-dark {
+    --bs-table-bg: #f8fafc;
+    --bs-table-color: #64748b;
+}
+
+/* ===============================
+   BADGES
+================================ */
+
+.table .badge {
+    font-size: 12px;
+    padding: 7px 11px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* ===============================
+   TABLE ACTION BUTTONS
+================================ */
+
+.table .btn-sm {
+    border-radius: 7px;
+    padding: 6px 11px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ===============================
+   EMPTY TABLE STATE
+================================ */
+
+.table tbody td[colspan] {
+    text-align: center;
+    padding: 45px 20px;
+    color: #64748b;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 25px;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+    }
+}
+
+/* Notifications modernes */
+
+.alert {
+    border-radius: 12px !important;
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #eaf7ef;
+    color: #167347;
+}
+
+.alert-danger {
+    background-color: #fdecee;
+    color: #b42335;
+}
+
+.alert-warning {
+    background-color: #fff7e6;
+    color: #946200;
+}
+
+.alert-info {
+    background-color: #eaf2ff;
+    color: #3158bc;
 }

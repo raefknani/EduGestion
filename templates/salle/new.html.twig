@@ -4,31 +4,29 @@
 {% endblock %}
 
 {% block body %}
-
-	<div class="container mt-5">
-
+	<div class="container py-5">
 		<div class="row justify-content-center">
-			<div class="col-md-7">
+			<div class="col-lg-7 col-md-9">
 
-				<div class="card shadow-sm">
+				<div class="card border-0 shadow-sm overflow-hidden">
 
-					<div class="card-header bg-primary text-white">
-						<h4 class="mb-0">
+					<div class="card-body p-4 border-bottom">
+						<h3 class="fw-bold mb-2">
 							Ajouter une salle
-						</h4>
+						</h3>
+						<p class="text-muted mb-0">
+							Renseignez les informations de
+							                        la nouvelle salle.
+						</p>
 					</div>
 
-					<div class="card-body">
-
+					<div class="card-body p-4">
 						{{ include('salle/_form.html.twig') }}
-
 					</div>
 
 				</div>
 
 			</div>
 		</div>
-
 	</div>
-
 {% endblock %}

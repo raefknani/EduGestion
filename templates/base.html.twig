@@ -24,7 +24,7 @@
 	</head>
 	<body>
 
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<nav class="navbar navbar-expand-lg navbar-light bg-white">
 			<div class="container">
 
 				<a class="navbar-brand" href="{{ path('app_home') }}">
@@ -33,21 +33,23 @@
 
 				<div class="navbar-nav">
 
-					<a class="nav-link" href="{{ path('app_home') }}">
+
+					<a class="nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">
 						Accueil
 					</a>
 
-					<a class="nav-link" href="{{ path('app_note_index') }}">
+					<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_note_' ? 'active' : '' }}" href="{{ path('app_note_index') }}">
 						Notes
 					</a>
 
-					<a class="nav-link" href="{{ path('app_absence_index') }}">
+					<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_absence_' ? 'active' : '' }}" href="{{ path('app_absence_index') }}">
 						Absences
 					</a>
 
-					<a class="nav-link" href="{{ path('app_salle_index') }}">
+					<a class="nav-link {{ app.request.attributes.get('_route') starts with 'app_salle_' ? 'active' : '' }}" href="{{ path('app_salle_index') }}">
 						Salles
 					</a>
+
 
 				</div>
 			</div>
@@ -67,6 +69,38 @@
 			{% endfor %}
 
 		</div>
+
+
+		{# Notifications flash #}
+		<div class="container mt-4">
+
+			{% for label, messages in app.flashes %}
+
+				{% for message in messages %}
+
+					<div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show
+						                        d-flex align-items-center gap-2 shadow-sm border-0 rounded-3" role="alert">
+
+						{% if label == 'success' %}
+							<span class="fw-bold">✓</span>
+						{% elseif label == 'error' or label == 'danger' %}
+							<span class="fw-bold">!</span>
+						{% else %}
+							<span class="fw-bold">ℹ</span>
+						{% endif %}
+
+						<span>{{ message }}</span>
+
+						<button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Fermer"></button>
+
+					</div>
+
+				{% endfor %}
+
+			{% endfor %}
+
+		</div>
+
 
 		{% block body %}{% endblock %}
 

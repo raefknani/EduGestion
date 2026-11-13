@@ -5,95 +5,135 @@
 
 {% block body %}
 
-	<div class="container mt-5">
+	<div
+		class="container py-5">
 
-		<h1 class="text-center mb-3">EduGestion</h1>
+		{# Page heading #}
+		<div class="mb-5">
+			<h1 class="fw-bold mb-2">Tableau de bord</h1>
+			<p class="text-muted">
+				Bienvenue sur EduGestion.
+				            Gérez vos notes, absences et salles facilement.
+			</p>
+		</div>
 
-		<p class="text-center text-muted mb-5">
-			Application de gestion universitaire
-		</p>
+		{# Statistics #}
+		<div class="row g-4 mb-5">
 
-		<h2 class="mb-4">Tableau de bord</h2>
-
-		<div class="row g-3 mb-5">
-
-			<div class="col-md-3">
-				<div class="card bg-primary text-white">
-					<div class="card-body text-center">
-						<h5>Notes</h5>
-						<h2>{{ totalNotes }}</h2>
+			<div class="col-md-6 col-lg-3">
+				<div class="card h-100 shadow-sm">
+					<div class="card-body p-4">
+						<div class="d-flex justify-content-between align-items-center">
+							<span class="text-muted">Notes</span>
+							<span class="fs-4">📚</span>
+						</div>
+						<h2 class="fw-bold mt-3 mb-0 text-primary">
+							{{ totalNotes }}
+						</h2>
+						<small class="text-muted">Notes enregistrées</small>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-3">
-				<div class="card bg-danger text-white">
-					<div class="card-body text-center">
-						<h5>Absences</h5>
-						<h2>{{ totalAbsences }}</h2>
+			<div class="col-md-6 col-lg-3">
+				<div class="card h-100 shadow-sm">
+					<div class="card-body p-4">
+						<div class="d-flex justify-content-between align-items-center">
+							<span class="text-muted">Absences</span>
+							<span class="fs-4">📅</span>
+						</div>
+						<h2 class="fw-bold mt-3 mb-0 text-danger">
+							{{ totalAbsences }}
+						</h2>
+						<small class="text-muted">Absences enregistrées</small>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-3">
-				<div class="card bg-secondary text-white">
-					<div class="card-body text-center">
-						<h5>Salles</h5>
-						<h2>{{ totalSalles }}</h2>
+			<div class="col-md-6 col-lg-3">
+				<div class="card h-100 shadow-sm">
+					<div class="card-body p-4">
+						<div class="d-flex justify-content-between align-items-center">
+							<span class="text-muted">Salles</span>
+							<span class="fs-4">🏫</span>
+						</div>
+						<h2 class="fw-bold mt-3 mb-0" style="color: #7654ad;">
+							{{ totalSalles }}
+						</h2>
+						<small class="text-muted">Total des salles</small>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-3">
-				<div class="card bg-success text-white">
-					<div class="card-body text-center">
-						<h5>Salles disponibles</h5>
-						<h2>{{ sallesDisponibles }}</h2>
+			<div class="col-md-6 col-lg-3">
+				<div class="card h-100 shadow-sm">
+					<div class="card-body p-4">
+						<div class="d-flex justify-content-between align-items-center">
+							<span class="text-muted">Disponibles</span>
+							<span class="fs-4">✅</span>
+						</div>
+						<h2 class="fw-bold mt-3 mb-0 text-success">
+							{{ sallesDisponibles }}
+						</h2>
+						<small class="text-muted">Salles disponibles</small>
 					</div>
 				</div>
 			</div>
 
 		</div>
+
+		{# Quick access #}
+		<h2 class="fw-bold mb-4">Accès rapide</h2>
 
 		<div class="row g-4">
 
 			<div class="col-md-4">
-				<div class="card shadow-sm text-center">
-					<div class="card-body">
-						<h3>Notes</h3>
-						<p>Gestion des notes des étudiants</p>
-						<a href="{{ path('app_note_index') }}" class="btn btn-primary">
-							Gérer les notes
+				<div class="card h-100 shadow-sm">
+					<div class="card-body p-4">
+						<h4>📚 Gestion des notes</h4>
+						<p class="text-muted mt-3">
+							Ajouter, consulter et modifier les notes
+							                        des étudiants.
+						</p>
+						<a href="{{ path('app_note_index') }}" class="btn btn-outline-primary mt-2">
+							Gérer les notes →
 						</a>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-md-4">
-				<div class="card shadow-sm text-center">
-					<div class="card-body">
-						<h3>Absences</h3>
-						<p>Gestion des absences</p>
-						<a href="{{ path('app_absence_index') }}" class="btn btn-success">
-							Gérer les absences
+				<div class="card h-100 shadow-sm">
+					<div class="card-body p-4">
+						<h4>📅 Gestion des absences</h4>
+						<p class="text-muted mt-3">
+							Suivre les absences et gérer
+							                        les justifications.
+						</p>
+						<a href="{{ path('app_absence_index') }}" class="btn btn-outline-primary mt-2">
+							Gérer les absences →
 						</a>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-md-4">
-				<div class="card shadow-sm text-center">
-					<div class="card-body">
-						<h3>Salles</h3>
-						<p>Gestion des salles</p>
-						<a href="{{ path('app_salle_index') }}" class="btn btn-warning">
-							Gérer les salles
+				<div class="card h-100 shadow-sm">
+					<div class="card-body p-4">
+						<h4>🏫 Gestion des salles</h4>
+						<p class="text-muted mt-3">
+							Consulter les salles, leur capacité
+							                        et leur disponibilité.
+						</p>
+						<a href="{{ path('app_salle_index') }}" class="btn btn-outline-primary mt-2">
+							Gérer les salles →
 						</a>
 					</div>
 				</div>
 			</div>
 
 		</div>
+
 	</div>
 
 {% endblock %}

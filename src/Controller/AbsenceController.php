@@ -10,11 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
 #[Route('/absence')]
 final class AbsenceController extends AbstractController
 {
     
+
 #[Route('/', name: 'app_absence_index', methods: ['GET'])]
 public function index(
     Request $request,
@@ -22,6 +22,7 @@ public function index(
 ): Response {
     $search = trim($request->query->get('search', ''));
     $justifiee = $request->query->get('justifiee', '');
+    $date = $request->query->get('date', '');
 
     $qb = $absenceRepository->createQueryBuilder('a');
 
@@ -31,10 +32,23 @@ public function index(
            ->setParameter('search', '%' . $search . '%');
     }
 
-    // Filter by justification status
+    // Filter by justification
     if ($justifiee === '1' || $justifiee === '0') {
         $qb->andWhere('a.justifiee = :justifiee')
-           ->setParameter('justifiee', (int) $justifiee);
+           ->setParameter('justifiee', $justifiee === '1');
+    }
+
+    // Filter by absence date
+    if ($date !== '') {
+        $dateObject = \DateTimeImmutable::createFromFormat(
+            '!Y-m-d',
+            $date
+        );
+
+        if ($dateObject && $dateObject->format('Y-m-d') === $date) {
+            $qb->andWhere('a.dateAbsence = :date')
+               ->setParameter('date', $dateObject, \Doctrine\DBAL\Types\Types::DATE_IMMUTABLE);
+        }
     }
 
     $absences = $qb->getQuery()->getResult();
@@ -43,6 +57,7 @@ public function index(
         'absences' => $absences,
         'search' => $search,
         'justifiee' => $justifiee,
+        'date' => $date,
     ]);
 }
 

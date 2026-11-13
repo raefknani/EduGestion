@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SalleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SalleRepository::class)]
 class Salle
@@ -14,9 +15,12 @@ class Salle
     private ?int $id = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: "Le numéro de la salle est obligatoire.")]
     private ?string $numero = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "La capacité de la salle est obligatoire.")]
+    #[Assert\Positive(message: "La capacité de la salle doit être un nombre positif.")]
     private ?int $capacite = null;
 
     #[ORM\Column]

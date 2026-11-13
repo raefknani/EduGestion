@@ -5,72 +5,98 @@
 
 {% block body %}
 
-	<div class="container mt-5">
+	<div class="container py-5">
 
 		<div class="row justify-content-center">
-			<div class="col-md-7">
+			<div class="col-lg-7 col-md-9">
 
-				<div class="card shadow-sm">
+				<div
+					class="card shadow-sm border-0 overflow-hidden">
 
-					<div class="card-header bg-primary text-white">
-						<h4 class="mb-0">
+					{# Header #}
+					<div class="card-body p-4 border-bottom">
+						<h3 class="fw-bold mb-2">
 							Détails de l'absence
-						</h4>
+						</h3>
+
+						<p class="text-muted mb-0">
+							Informations concernant l'absence enregistrée
+						</p>
 					</div>
 
-					<div class="card-body">
+					{# Information #}
+					<div class="card-body p-4">
 
-						<table class="table table-bordered">
-							<tbody>
-
-								<tr>
-									<th>ID</th>
-									<td>{{ absence.id }}</td>
-								</tr>
-
-								<tr>
-									<th>Nom étudiant</th>
-									<td>{{ absence.nomEtudiant }}</td>
-								</tr>
-
-								<tr>
-									<th>Date d'absence</th>
-									<td>
-										{{ absence.dateAbsence|date('d/m/Y') }}
-									</td>
-								</tr>
-
-								<tr>
-									<th>Justification</th>
-									<td>
-										{% if absence.justifiee %}
-											<span class="badge bg-success">
-												Justifiée
-											</span>
-										{% else %}
-											<span class="badge bg-danger">
-												Non justifiée
-											</span>
-										{% endif %}
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-
-						<div class="d-flex gap-2 mb-3">
-
-							<a href="{{ path('app_absence_index') }}" class="btn btn-secondary">
-								Retour
-							</a>
-
-							<a href="{{ path('app_absence_edit', { 'id': absence.id }) }}" class="btn btn-warning">
-								Modifier
-							</a>
-
+						<div class="d-flex justify-content-between
+								                                align-items-center py-3 border-bottom">
+							<span class="text-muted">
+								Identifiant
+							</span>
+							<span class="fw-semibold">
+								#{{ absence.id }}
+							</span>
 						</div>
 
-						{{ include('absence/_delete_form.html.twig') }}
+						<div class="d-flex justify-content-between
+								                                align-items-center py-3 border-bottom">
+							<span class="text-muted">
+								Nom de l'étudiant
+							</span>
+							<span class="fw-semibold">
+								{{ absence.nomEtudiant }}
+							</span>
+						</div>
+
+						<div class="d-flex justify-content-between
+								                                align-items-center py-3 border-bottom">
+							<span class="text-muted">
+								Date d'absence
+							</span>
+							<span class="fw-semibold">
+								{{ absence.dateAbsence|date('d/m/Y') }}
+							</span>
+						</div>
+
+						<div class="d-flex justify-content-between
+								                                align-items-center py-3">
+							<span class="text-muted">
+								Justification
+							</span>
+
+							{% if absence.justifiee %}
+								<span class="badge bg-success rounded-pill px-3 py-2">
+									Justifiée
+								</span>
+							{% else %}
+								<span class="badge bg-danger rounded-pill px-3 py-2">
+									Non justifiée
+								</span>
+							{% endif %}
+						</div>
+
+					</div>
+
+					{# Actions #}
+					<div class="card-footer bg-white border-top p-4">
+
+						<div class="d-flex justify-content-between
+								                                align-items-center flex-wrap gap-2">
+
+							<div class="d-flex gap-2">
+
+								<a href="{{ path('app_absence_index') }}" class="btn btn-outline-secondary">
+									← Retour
+								</a>
+
+								<a href="{{ path('app_absence_edit', { 'id': absence.id }) }}" class="btn btn-primary">
+									Modifier
+								</a>
+
+							</div>
+
+							{{ include('absence/_delete_form.html.twig') }}
+
+						</div>
 
 					</div>
 
