@@ -1,4 +1,54 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="mb-3">
+	{{ form_label(form.nomEtudiant, "Nom de l'étudiant") }}
+
+	{{ form_widget(form.nomEtudiant, {
+        'attr': {
+            'class': 'form-control',
+            'placeholder': 'Ex : Ahmed Ben Ali'
+        }
+    }) }}
+
+	{{ form_errors(form.nomEtudiant) }}
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.dateAbsence, "Date d'absence") }}
+
+	{{ form_widget(form.dateAbsence, {
+        'attr': {
+            'class': 'form-control'
+        }
+    }) }}
+
+	{{ form_errors(form.dateAbsence) }}
+</div>
+
+<div class="form-check mb-3">
+	{{ form_widget(form.justifiee, {
+        'attr': {
+            'class': 'form-check-input'
+        }
+    }) }}
+
+	{{ form_label(form.justifiee, 'Absence justifiée', {
+        'label_attr': {
+            'class': 'form-check-label'
+        }
+    }) }}
+
+	{{ form_errors(form.justifiee) }}
+</div>
+
+<div class="d-flex gap-2">
+	<button type="submit" class="btn btn-success">
+		{{ button_label|default('Enregistrer') }}
+	</button>
+
+	<a href="{{ path('app_absence_index') }}" class="btn btn-secondary">
+		Annuler
+	</a>
+</div>
+
 {{ form_end(form) }}

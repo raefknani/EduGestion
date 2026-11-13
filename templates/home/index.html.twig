@@ -13,6 +13,48 @@
 			Application de gestion universitaire
 		</p>
 
+		<h2 class="mb-4">Tableau de bord</h2>
+
+		<div class="row g-3 mb-5">
+
+			<div class="col-md-3">
+				<div class="card bg-primary text-white">
+					<div class="card-body text-center">
+						<h5>Notes</h5>
+						<h2>{{ totalNotes }}</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="card bg-danger text-white">
+					<div class="card-body text-center">
+						<h5>Absences</h5>
+						<h2>{{ totalAbsences }}</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="card bg-secondary text-white">
+					<div class="card-body text-center">
+						<h5>Salles</h5>
+						<h2>{{ totalSalles }}</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="card bg-success text-white">
+					<div class="card-body text-center">
+						<h5>Salles disponibles</h5>
+						<h2>{{ sallesDisponibles }}</h2>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
 		<div class="row g-4">
 
 			<div class="col-md-4">

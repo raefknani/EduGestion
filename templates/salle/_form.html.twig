@@ -1,4 +1,56 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="mb-3">
+	{{ form_label(form.numero, 'Numéro de salle') }}
+
+	{{ form_widget(form.numero, {
+        'attr': {
+            'class': 'form-control',
+            'placeholder': 'Ex : A101'
+        }
+    }) }}
+
+	{{ form_errors(form.numero) }}
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.capacite, 'Capacité') }}
+
+	{{ form_widget(form.capacite, {
+        'attr': {
+            'class': 'form-control',
+            'min': 1,
+            'placeholder': 'Ex : 30'
+        }
+    }) }}
+
+	{{ form_errors(form.capacite) }}
+</div>
+
+<div class="form-check mb-3">
+	{{ form_widget(form.disponible, {
+        'attr': {
+            'class': 'form-check-input'
+        }
+    }) }}
+
+	{{ form_label(form.disponible, 'Salle disponible', {
+        'label_attr': {
+            'class': 'form-check-label'
+        }
+    }) }}
+
+	{{ form_errors(form.disponible) }}
+</div>
+
+<div class="d-flex gap-2">
+	<button type="submit" class="btn btn-success">
+		{{ button_label|default('Enregistrer') }}
+	</button>
+
+	<a href="{{ path('app_salle_index') }}" class="btn btn-secondary">
+		Annuler
+	</a>
+</div>
+
 {{ form_end(form) }}

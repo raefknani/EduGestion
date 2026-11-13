@@ -57,6 +57,10 @@ public function index(
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($salle);
             $entityManager->flush();
+            $this->addFlash(
+    'success',
+    'La salle a été ajoutée avec succès !'
+);
 
             return $this->redirectToRoute('app_salle_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -83,6 +87,10 @@ public function index(
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash(
+    'success',
+    'La salle a été modifiée avec succès !'
+);
 
             return $this->redirectToRoute('app_salle_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -99,6 +107,10 @@ public function index(
         if ($this->isCsrfTokenValid('delete'.$salle->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($salle);
             $entityManager->flush();
+            $this->addFlash(
+    'success',
+    'La salle a été supprimée avec succès !'
+);
         }
 
         return $this->redirectToRoute('app_salle_index', [], Response::HTTP_SEE_OTHER);

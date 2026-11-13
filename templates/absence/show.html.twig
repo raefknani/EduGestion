@@ -1,34 +1,84 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Absence{% endblock %}
+{% block title %}Détails de l'absence
+{% endblock %}
 
 {% block body %}
-    <h1>Absence</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ absence.id }}</td>
-            </tr>
-            <tr>
-                <th>NomEtudiant</th>
-                <td>{{ absence.nomEtudiant }}</td>
-            </tr>
-            <tr>
-                <th>DateAbsence</th>
-                <td>{{ absence.dateAbsence ? absence.dateAbsence|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Justifiee</th>
-                <td>{{ absence.justifiee ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="container mt-5">
 
-    <a href="{{ path('app_absence_index') }}">back to list</a>
+		<div class="row justify-content-center">
+			<div class="col-md-7">
 
-    <a href="{{ path('app_absence_edit', {'id': absence.id}) }}">edit</a>
+				<div class="card shadow-sm">
 
-    {{ include('absence/_delete_form.html.twig') }}
+					<div class="card-header bg-primary text-white">
+						<h4 class="mb-0">
+							Détails de l'absence
+						</h4>
+					</div>
+
+					<div class="card-body">
+
+						<table class="table table-bordered">
+							<tbody>
+
+								<tr>
+									<th>ID</th>
+									<td>{{ absence.id }}</td>
+								</tr>
+
+								<tr>
+									<th>Nom étudiant</th>
+									<td>{{ absence.nomEtudiant }}</td>
+								</tr>
+
+								<tr>
+									<th>Date d'absence</th>
+									<td>
+										{{ absence.dateAbsence|date('d/m/Y') }}
+									</td>
+								</tr>
+
+								<tr>
+									<th>Justification</th>
+									<td>
+										{% if absence.justifiee %}
+											<span class="badge bg-success">
+												Justifiée
+											</span>
+										{% else %}
+											<span class="badge bg-danger">
+												Non justifiée
+											</span>
+										{% endif %}
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+						<div class="d-flex gap-2 mb-3">
+
+							<a href="{{ path('app_absence_index') }}" class="btn btn-secondary">
+								Retour
+							</a>
+
+							<a href="{{ path('app_absence_edit', { 'id': absence.id }) }}" class="btn btn-warning">
+								Modifier
+							</a>
+
+						</div>
+
+						{{ include('absence/_delete_form.html.twig') }}
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
 {% endblock %}

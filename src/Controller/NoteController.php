@@ -71,6 +71,10 @@ public function index(
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($note);
             $entityManager->flush();
+            $this->addFlash(
+    'success',
+    'La note a été ajoutée avec succès !'
+);
 
             return $this->redirectToRoute('app_note_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -97,6 +101,10 @@ public function index(
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash(
+    'success',
+    "La note a été modifiée avec succès !"
+);
 
             return $this->redirectToRoute('app_note_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -113,6 +121,10 @@ public function index(
         if ($this->isCsrfTokenValid('delete'.$note->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($note);
             $entityManager->flush();
+            $this->addFlash(
+    'success',
+    'La note a été supprimée avec succès !'
+);
         }
 
         return $this->redirectToRoute('app_note_index', [], Response::HTTP_SEE_OTHER);

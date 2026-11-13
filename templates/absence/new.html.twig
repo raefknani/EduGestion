@@ -1,11 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Absence{% endblock %}
+{% block title %}Ajouter une absence
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Absence</h1>
 
-    {{ include('absence/_form.html.twig') }}
+	<div class="container mt-5">
 
-    <a href="{{ path('app_absence_index') }}">back to list</a>
+		<div class="row justify-content-center">
+			<div class="col-md-7">
+
+				<div class="card shadow-sm">
+
+					<div class="card-header bg-primary text-white">
+						<h4 class="mb-0">
+							Ajouter une absence
+						</h4>
+					</div>
+
+					<div class="card-body">
+
+						{{ include('absence/_form.html.twig') }}
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
 {% endblock %}
